@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Commons Mobile App Campaign Editor</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Wikimedia Commons Campaign Editor</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 	<style>
 		.campaign {
 			border: 1px solid #ced4da;
-			border-radius: .25rem;
+			border-radius: .5rem;
 			background: #fafafa;
-			margin-left: 0;
-			margin-right: 0;
+			margin-top: 1rem;
+			padding: 0 0.75rem 1.5rem 0.75rem;
 		}
 	</style>
 </head>
 
 <body>
-    <div class="container my-4">
-		<h1 class="my-4">Campaign editor</h1>
-		
+	<div class="container my-4">
+		<h1 class="my-4">Wikimedia Commons Campaign Editor</h1>
+
 		<section class="my-2">
 			<h2>Campaigns</h2>
 			<form oninput="generateJSON()" onchange="generateJSON()" id="form"></form>
 			<div class="btn-group mb-4 mt-3" role="group" style="flex-wrap: wrap;">
 				<button onclick="addSection()" type="button" class="btn btn-outline-primary">Add</button>
 				<button id="removeSectionButton" onclick="removeSection()" type="button" class="btn btn-outline-primary">Remove</button>
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Import</button>
-					<div class="dropdown-menu">
-						<button onclick="overwriteConfirm(importFromGithub)" type="button" class="btn btn-outline-primary dropdown-item">Live version</button>
-						<button onclick="overwriteConfirm(importFromPaste)" type="button" class="btn btn-outline-primary dropdown-item">From paste</button>
-					</div>
+				<div class="btn-group">
+					<button type="button" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" id="importDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">Import</button>
+					<ul class="dropdown-menu" aria-labelledby="importDropdownButton">
+						<li><a class="dropdown-item" onclick="overwriteConfirm(importFromGithub)" href="#">Live version</a></li>
+						<li><a class="dropdown-item" onclick="overwriteConfirm(importFromPaste)" href="#">From paste</a></li>
+					</ul>
 				</div>
 			</div>
 		</section>
 
 		<section class="my-2">
-				<h2>Config</h2>
-				<form class="pb-4" oninput="generateJSON()" onchange="generateJSON()">
-					<div class="form-check my-2">
-						<input type="checkbox" class="form-check-input" id="showOnlyLiveCampaigns">
-						<label class="form-check-label" for="showOnlyLiveCampaigns">Show only live campaigns</label>
-					</div>
-					<div class="form-group my-2">
-						<label for="sortBy">Sort by</label>
-						<input type="text" class="form-control" id="sortBy" placeholder="title/startDate/endDate">
-					</div>
-				</form>
-			</section>
+			<h2>Config</h2>
+			<form class="pb-4" oninput="generateJSON()" onchange="generateJSON()">
+				<div class="form-check my-2">
+					<input type="checkbox" class="form-check-input" id="showOnlyLiveCampaigns" />
+					<label class="form-check-label" for="showOnlyLiveCampaigns">Show only live campaigns</label>
+				</div>
+				<div class="form-group my-2">
+					<label for="sortBy">Sort by (separated by forward slash)</label>
+					<input type="text" class="form-control" id="sortBy" placeholder="title/startDate/endDate" />
+				</div>
+			</form>
+		</section>
 
 		<section class="my-4">
 			<h2>Result</h2>
@@ -62,10 +63,7 @@
 		</section>
 	</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.10.0/ajv.min.js" integrity="sha256-KvJf+3L+RQpJ3LEBMcU2Yh29dlCt1CHbxKhwLtJUb94=" crossorigin="anonymous"></script>
 
 	<script>
@@ -77,13 +75,12 @@
 		fetch('https://raw.githubusercontent.com/commons-app/campaigns/master/schema.json')
 			.then(res => res.json())
 			.then(schema => validate = (new Ajv()).compile(schema))
-			.then(() => generateJSON());
-		addSection();
+			.then(() => importFromGithub());
 
 		function addSection() {
 			const section = document.createElement("div");
 			const n = campaignCounter++;
-			section.innerHTML = 
+			section.innerHTML =
 				`<div class="form-group col-md-6">
 					<label for="title${n}">Title</label>
 					<input type="text" class="form-control" id="title${n}" placeholder="Wiki Loves Monuments">
@@ -92,9 +89,7 @@
 					<label for="description${n}">Description</label>
 					<div class="input-group">
 						<input type="text" class="form-control" id="description${n}" placeholder="Wiki Loves Monuments">
-						<div class="input-group-append">
 							<button onclick="description${n}.value = title${n}.value" type="button" class="btn btn-outline-primary input-group-text">Copy title</button>
-						</div>
 					</div>
 				</div>
 				<div class="form-group col-sm-6 col-md-3">
@@ -109,10 +104,10 @@
 					<label for="link${n}">Link</label>
 					<input type="url" class="form-control" id="link${n}" placeholder="https://www.wikilovesmonuments.org">
 				</div>
-				<div class="form-group col-md-12">
-					<button onclick="removeSection(${n})" type="button" class="btn btn-outline-danger btn-block">Remove</button>
+				<div class="form-group col-md-12 d-grid">
+					<button onclick="removeSection(${n})" type="button" class="btn btn-outline-danger">Remove</button>
 				</div>`;
-			section.classList.add("mt-3", "pt-3", "pb-2", "row", "campaign");
+			section.classList.add("row", "campaign", "gy-4");
 			section.id = `campaign${n}`;
 			form.appendChild(section);
 			document.getElementById('removeSectionButton').disabled = false;
@@ -132,14 +127,14 @@
 
 		function generateJSON() {
 			const campaigns = [...form.children]
-			.map(e => e.id.slice(-1))
-			.map(n => ({
-				"title": document.getElementById(`title${n}`).value,
-				"description": document.getElementById(`description${n}`).value,
-				"startDate": document.getElementById(`startDate${n}`).value,
-				"endDate": document.getElementById(`endDate${n}`).value,
-				"link": document.getElementById(`link${n}`).value
-			})).filter(campaign => campaign.title.trim().length != 0);
+				.map(e => e.id.slice('campaign'.length))
+				.map(n => ({
+					"title": document.getElementById(`title${n}`).value,
+					"description": document.getElementById(`description${n}`).value,
+					"startDate": document.getElementById(`startDate${n}`).value,
+					"endDate": document.getElementById(`endDate${n}`).value,
+					"link": document.getElementById(`link${n}`).value
+				})).filter(campaign => campaign.title.trim().length != 0);
 
 			const config = {
 				"showOnlyLiveCampaigns": document.getElementById('showOnlyLiveCampaigns').checked,
@@ -177,7 +172,7 @@
 		}
 
 		function overwriteConfirm(f) {
-			if(confirm("Warning: importing will overwrite the current data. Do you want to proceed?")) f();
+			if (confirm("Warning: importing will overwrite the current data. Do you want to proceed?")) f();
 		}
 
 		function importFromPaste() {
@@ -201,7 +196,7 @@
 				console.error(err);
 				return;
 			}
-			
+
 			if (validate == null) {
 				alert("Validation function not instantiated. Please try again in a few seconds.");
 			}
@@ -230,4 +225,5 @@
 		}
 	</script>
 </body>
+
 </html>
